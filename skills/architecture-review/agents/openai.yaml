@@ -1,0 +1,6 @@
+interface:
+  display_name: "Architecture Review"
+  short_description: "Native architecture audits and safe simplification"
+  default_prompt: "Use $architecture-review to audit architecture complexity and redundant mechanisms with reproducible native evidence."
+policy:
+  allow_implicit_invocation: true

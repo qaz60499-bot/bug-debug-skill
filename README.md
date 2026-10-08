@@ -26,6 +26,15 @@ The workflow standardizes:
 - `test-and-verify` — risk-proportionate verification
 - `plan-before-code` — bounded planning for larger changes
 - `universal-reverse-engineering-router` — lightweight provenance investigation route
+- `architecture-review` — targeted architecture auditing, mechanism review and evidence-gated simplification
+
+## Architecture Review
+
+The additional `skills/architecture-review/` skill is independent of the Debug pipeline. Its one-shot audit selects native search, Knip, dependency-cruiser and jscpd only when relevant; for reverse provenance and runtime confirmation it delegates to already-installed skills rather than duplicating them.
+
+To run locally: install the pinned analyzers with `npm ci --prefix skills/architecture-review/tools` (Node.js and ripgrep are also required), then execute `node skills/architecture-review/scripts/architecture.mjs audit --request <absolute-request.json>`. On Windows, if `rg.exe` is absent from PATH, set `ARCHITECTURE_RG_PATH` to your installed ripgrep binary. Deep Harness follow-ups require the separately installed `repo-map`, `universal-reverse-engineering`, `bug-triage`, `test-and-verify`, and `safe-edit` skills.
+
+This is a portable archive without `node_modules`, local runtime output, credentials, or machine-specific paths. The archive does not claim that all engines, runtime paths or model token costs were tested on every platform.
 
 ## Design principles
 

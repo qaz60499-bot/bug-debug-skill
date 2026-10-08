@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "dependency-cruiser": "18.5.0",
+    "jscpd": "5.4.0",
+    "knip": "6.40.0",
+    "typescript": "5.9.3"
+  }
+}
