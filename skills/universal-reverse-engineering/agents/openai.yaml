@@ -1,0 +1,42 @@
+interface:
+  display_name: "Universal Reverse Engineering"
+  short_description: "Canonical evidence-first reverse-engineering router and methodology."
+  skill: "universal-reverse-engineering"
+  version: "2.2.1"
+
+routing:
+  source_of_truth: "routing.md"
+  machine_index: "config/routing-v2.json"
+  regression_cases: "routing-regression-cases.md"
+  principles:
+    - route_first
+    - fingerprint_first
+    - static_first
+    - evidence_contract
+    - dynamic_only_for_bounded_hypothesis
+    - semantic_capability_routing
+    - depth_as_policy_not_router
+    - architecture_review_independent
+
+constraints:
+  preserve_agent_identity: true
+  preserve_memory: true
+  preserve_specialist_skill_isolation: true
+  create_second_agent_runtime: false
+  create_second_toolrouter: false
+  full_skill_only_for:
+    - "D:/DevSpace/home/skills/universal-reverse-engineering"
+    - "D:/wendangcodex/Codex7/home/skills/universal-reverse-engineering"
+    - "D:/wendangcodex/Kali-CloudCode/.agents/skills/universal-reverse-engineering"
+    - "D:/wendangcodex/Codex8/home/skills/universal-reverse-engineering"
+  lightweight_router_only_for:
+    - Codex2
+    - Codex3
+    - Codex4
+  excluded_from_full_skill:
+    - Codex1
+    - Codex5
+    - Codex6
+    - Codex9
+    - Codex10
+    - Codex11

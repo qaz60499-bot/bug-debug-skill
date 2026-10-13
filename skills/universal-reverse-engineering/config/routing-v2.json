@@ -1,0 +1,287 @@
+DEVSPACE_CONTINUITY_RISK: Approximately 911558 DevSpace tool characters since the last acknowledged checkpoint. This is a secondary context-pressure signal, not an exact token-count or host context percentage, and not an automatic handoff trigger. Ordinary chat, other tools and host compaction are not measured. The host owns context management.
+{
+  "schema_version": 3,
+  "skill": "universal-reverse-engineering",
+  "version": "2.2.7",
+  "source_of_truth": "routing.md",
+  "machine_index": "config/routing-v2.json",
+  "regression_cases": "routing-regression-cases.md",
+  "evidence_contract": [
+    "Observation",
+    "Inference",
+    "Unknown"
+  ],
+  "required_gates": {
+    "artifact_fingerprint_before_deep_analysis": true,
+    "artifact_fingerprint_before_version_diff": true,
+    "route_before_tool_choice": true,
+    "static_before_dynamic": true,
+    "dynamic_requires_hypothesis": true,
+    "unknowns_must_be_preserved": true,
+    "trace_requires_identified_artifact": true,
+    "cross_boundary_requires_observed_signal": true,
+    "differential_requires_independent_cases": true
+  },
+  "capabilities": {
+    "evidence_contract": "references/14-evidence-contract.md",
+    "artifact_fingerprint": "references/15-artifact-identity.md",
+    "symbol_recovery": "references/16-symbol-recovery.md",
+    "structure_recovery": "references/17-structure-recovery.md",
+    "function_level_emulation": "references/18-function-level-emulation.md",
+    "unity_il2cpp_route": "references/19-unity-il2cpp.md",
+    "version_diff": "references/20-version-diff.md",
+    "android_framework_routing": "references/21-android-framework-routing.md",
+    "routing_ssot_regression": "references/22-routing-ssot-regression.md"
+  },
+  "negative_rules": [
+    "csharp_alone_must_not_imply_unity",
+    "evidence_from_different_builds_must_not_merge_without_fingerprints",
+    "decompiler_output_alone_must_not_confirm_findings",
+    "framework_generated_code_must_not_be_assigned_to_app_logic_without_ownership_evidence",
+    "function_level_emulation_must_not_claim_whole_app_behavior"
+  ],
+  "routing_model": {
+    "role": "Universal, artifact-neutral capability planning; not a device-specialized skill or agent runtime",
+    "decision_source": "Agent converts user goal and observed evidence into explicit capability IDs; deterministic validator verifies the choices; no keyword-only dispatch",
+    "task_descriptor": [
+      "goal",
+      "objectives",
+      "artifact.surfaces",
+      "artifact.kind",
+      "needs",
+      "verifiedSignals",
+      "depth",
+      "scope",
+      "constraints",
+      "runtimeHypothesis",
+      "authorizedRuntimeObservation",
+      "traceArtifact",
+      "comparisonCases",
+      "allowCrossSkillHandoff"
+    ],
+    "routing_axes": [
+      "intent",
+      "artifact evidence",
+      "capability need",
+      "verified constraints"
+    ],
+    "depth_policy": "User-selected analysis breadth/intensity, not a separate quick/deep routing tree",
+    "default_policy": "When capabilities cannot be grounded, use bounded target triage and keep unknowns; never invoke every module",
+    "module_loading": "Load only references named by selected modules",
+    "interop": "Architecture-review is independent and optional; transfer scoped evidence questions through the existing agent harness, never silently execute another skill",
+    "dynamic_gate": "Runtime instrumentation needs a concrete hypothesis and authorization",
+    "completion": "Stop at sufficient evidence for the concrete question; preserve uncertainty and unsupported coverage"
+  },
+  "platform_routes": {
+    "source": "references/01-target-triage.md",
+    "binary-pe": "references/02-native-pe-elf-macho.md",
+    "binary-elf": "references/02-native-pe-elf-macho.md",
+    "binary-macho": "references/02-native-pe-elf-macho.md",
+    "apk": "references/03-android.md",
+    "aab": "references/03-android.md",
+    "dex": "references/03-android.md",
+    "ipa": "references/04-ios-macos.md",
+    "dotnet": "references/05-dotnet.md",
+    "electron": "references/06-electron-flutter-thick-client.md",
+    "flutter": "references/06-electron-flutter-thick-client.md",
+    "firmware": "references/07-firmware.md",
+    "browser-extension": "references/06-electron-flutter-thick-client.md",
+    "ide-extension": "references/06-electron-flutter-thick-client.md",
+    "wasm": "references/08-wasm-bytecode-vm.md",
+    "bytecode": "references/08-wasm-bytecode-vm.md",
+    "javascript": "references/23-capability-routing.md",
+    "unknown": "references/01-target-triage.md"
+  },
+  "objective_capabilities": {
+    "identify-target": ["target-triage"],
+    "explain-call-chain": ["control-flow"],
+    "trace-data": ["data-flow"],
+    "explain-state": ["control-flow", "data-flow"],
+    "reconstruct-protocol": ["protocol", "data-flow"],
+    "trace-runtime-boundary": ["boundary-tracing"],
+    "compare-builds": ["version-diff"],
+    "observe-runtime": ["dynamic-observation"],
+    "recover-algorithm": ["control-flow", "data-flow"],
+    "swift-protocol-dispatch": ["control-flow", "structure-recovery"],
+    "swift-async-lifecycle": ["control-flow", "data-flow"],
+    "objc-swift-bridge": ["control-flow", "boundary-tracing"],
+    "ios-runtime-dispatch": ["dynamic-observation"]
+  },
+  "platform_evidence_overlays": [
+    {
+      "kinds": ["binary-macho"],
+      "signals": ["swift-metadata", "objc-metadata", "swift-async", "objc-selector"],
+      "reference": "references/04-ios-macos.md"
+    },
+    {
+      "kinds": ["source"],
+      "allSignals": ["swift-source", "ios-target"],
+      "reference": "references/04-ios-macos.md"
+    },
+    {
+      "kinds": ["source"],
+      "allSignals": ["objc-source", "ios-target"],
+      "reference": "references/04-ios-macos.md"
+    }
+  ],
+  "capability_registry": {
+    "target-triage": {
+      "reference": "references/01-target-triage.md",
+      "requires": [],
+      "class": "foundational"
+    },
+    "static-map": {
+      "reference": "references/23-capability-routing.md",
+      "requires": [],
+      "class": "analysis"
+    },
+    "control-flow": {
+      "reference": "references/23-capability-routing.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "analysis"
+    },
+    "data-flow": {
+      "reference": "references/24-data-flow-and-protocol.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "analysis"
+    },
+    "protocol": {
+      "reference": "references/24-data-flow-and-protocol.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "analysis"
+    },
+    "symbol-recovery": {
+      "reference": "references/16-symbol-recovery.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "analysis"
+    },
+    "structure-recovery": {
+      "reference": "references/17-structure-recovery.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "analysis"
+    },
+    "dynamic-observation": {
+      "reference": "references/10-dynamic-analysis.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "conditional",
+      "gate": "runtimeHypothesis"
+    },
+    "deobfuscation": {
+      "reference": "references/09-packed-obfuscated-anti-analysis.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "conditional",
+      "gate": "verifiedProtectionSignal"
+    },
+    "version-diff": {
+      "reference": "references/20-version-diff.md",
+      "requires": [
+        "target-triage"
+      ],
+      "class": "conditional",
+      "gate": "multipleFingerprints"
+    },
+    "function-emulation": {
+      "reference": "references/18-function-level-emulation.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "conditional",
+      "gate": "boundedFunction"
+    },
+    "unity-il2cpp": {
+      "reference": "references/19-unity-il2cpp.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "conditional",
+      "gate": "verifiedUnitySignal"
+    },
+    "android-framework": {
+      "reference": "references/21-android-framework-routing.md",
+      "requires": [
+        "static-map"
+      ],
+      "class": "conditional",
+      "gate": "verifiedAndroidFrameworkSignal"
+    },
+    "trace-reduction": {
+      "reference": "references/28-deep-trace-boundary-and-differential.md",
+      "requires": [],
+      "class": "conditional",
+      "gate": "traceArtifact"
+    },
+    "boundary-tracing": {
+      "reference": "references/28-deep-trace-boundary-and-differential.md",
+      "requires": ["data-flow"],
+      "class": "conditional",
+      "gate": "verifiedBoundarySignal"
+    },
+    "differential-verification": {
+      "reference": "references/28-deep-trace-boundary-and-differential.md",
+      "requires": [],
+      "class": "conditional",
+      "gate": "comparisonCases"
+    },
+    "architecture-collaboration": {
+      "reference": "references/25-cross-skill-handoff.md",
+      "requires": [],
+      "class": "external_optional",
+      "gate": "crossSkillOptIn"
+    },
+    "report-evidence": {
+      "reference": "references/12-evidence-model.md",
+      "requires": [],
+      "class": "output"
+    }
+  },
+  "capability_catalog": {
+    "architecture-collaboration": "Independent optional architecture-review Skill; separate tool ownership, permissions, scope and task identity",
+    "tool-adapters": "Use installed CLI/MCP under relevant reference; never assume a tool exists from a listed name",
+    "provenance-and-checkpoint": "references/26-evidence-provenance-and-checkpoint.md; independent evidence vs model-authored annotations",
+    "native-triage-fallback": "references/29-stripped-native-toolchain.md; ELF32/ELF64 plus PE metadata/dynsym; optional scoped Capstone linear --disasm-at, never a CFG",
+    "container-triage-fallback": "scripts/container-triage.py: offline bounded WASM/ASAR/APK metadata only; no execution, no new router; references/03,06,08",
+    "bounded-tool-budget": "references/27-bounded-tool-and-context-budget.md; capped retrieval and measured failure telemetry",
+    "optional-backend-probe": "scripts/preflight.ps1 -ToolNames rea; only probe selected tools on demand, never register or install",
+    "compact-planner": "scripts/route-capabilities.mjs --request <task.json> --compact; optional output projection, same gates"
+  },
+  "fixture_validation": {
+    "meaning": "Highest published case-specific validation level, NOT general capability or current tool readiness",
+    "by_artifact": {
+      "source": "routing_only",
+      "binary-pe": "first_layer_static",
+      "binary-elf": "bounded_static",
+      "binary-macho": "routing_only",
+      "apk": "static_jni",
+      "aab": "routing_only",
+      "dex": "static_jni_in_apk",
+      "ipa": "routing_only",
+      "dotnet": "routing_only",
+      "electron": "asar_container_only",
+      "flutter": "routing_only",
+      "firmware": "routing_only",
+      "browser-extension": "routing_only",
+      "ide-extension": "routing_only",
+      "wasm": "structure_only",
+      "bytecode": "routing_only",
+      "javascript": "routing_only",
+      "unknown": "routing_only"
+    }
+  },
+  "routing_script": "scripts/route-capabilities.mjs",
+  "routing_tests": "scripts/test-routing.mjs",
+  "routing_hardening_tests": "scripts/test-routing-hardening.mjs"
+}
